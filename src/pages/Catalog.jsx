@@ -1,7 +1,13 @@
+import { useState } from 'react'
 import GUNS from '../data/guns.js'
 import GunCard from '../components/GunCard.jsx'
+import SearchBar from '../components/SearchBar.jsx'
+import { filterGuns } from '../utils/filterGuns.js'
 
-function Catalog() {
+function Catalog({ isFavorite, onToggleFavorite }) {
+  const [query, setQuery] = useState('')
+  const results = filterGuns(GUNS, query)
+
   return (
     <>
       <section className="masthead">
@@ -15,11 +21,29 @@ function Catalog() {
       <section>
         <div className="list-head">
           <h2>Current stock</h2>
-          <span className="count">{GUNS.length} pieces</span>
+          <span className="count">{results.length} pieces</span>
         </div>
-        <ul className="stock">
-          {GUNS.map((gun) => <GunCard key={gun.name} gun={gun} />)}
-        </ul>
+
+        <SearchBar
+          value={query}
+          onChange={setQuery}
+          placeholder="Search name, type, or caliber…"
+        />
+
+        {results.length === 0 ? (
+          <p className="empty">No pieces match “{query.trim()}”.</p>
+        ) : (
+          <ul className="stock">
+            {results.map((gun) => (
+              <GunCard
+                key={gun.name}
+                gun={gun}
+                isFavorite={isFavorite(gun.name)}
+                onToggleFavorite={onToggleFavorite}
+              />
+            ))}
+          </ul>
+        )}
       </section>
     </>
   )

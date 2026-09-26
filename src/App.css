@@ -16,9 +16,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  flex-wrap: wrap;
   padding: 14px 24px;
   background: var(--paper);
   border-bottom: 1px solid var(--line);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -32,8 +34,15 @@
   color: var(--ink);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 24px;
 }
 
@@ -54,6 +63,63 @@
 .nav-link.active {
   color: var(--ink);
   border-bottom-color: var(--brass);
+}
+
+.nav-badge {
+  display: inline-block;
+  min-width: 18px;
+  margin-left: 6px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--brass);
+  color: var(--badge-text);
+  font-size: 0.7rem;
+  line-height: 18px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.install-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.install-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.theme-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.theme-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.theme-icon {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
 }
 
 .main {
@@ -104,6 +170,61 @@
   font-size: 0.9rem;
 }
 
+.empty {
+  color: var(--steel);
+  margin: 0;
+}
+
+.search {
+  position: relative;
+  margin: 4px 0 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 38px 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: var(--steel);
+}
+
+.search-input:focus {
+  border-color: var(--brass);
+}
+
+.search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search-clear {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--steel);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.search-clear:hover {
+  color: var(--ink);
+}
+
 .stock {
   list-style: none;
   margin: 0;
@@ -114,7 +235,37 @@
 }
 
 .card {
+  position: relative;
   display: flex;
+}
+
+.fav-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--img-bg);
+  color: var(--steel);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.fav-btn:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+}
+
+.fav-btn.active {
+  border-color: var(--brass);
+  color: var(--brass);
 }
 
 .card-btn {
@@ -123,11 +274,12 @@
   flex-direction: column;
   gap: 4px;
   padding: 0 0 14px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   font: inherit;
   text-align: left;
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .card-btn:hover {
@@ -136,7 +288,10 @@
 
 .card-img {
   width: 100%;
-  height: auto;
+  height: 120px;
+  padding: 8px;
+  object-fit: contain;
+  background: var(--img-bg);
   margin-bottom: 10px;
   border-bottom: 1px solid var(--line);
 }
@@ -177,7 +332,10 @@
 
 .popup-img {
   width: 100%;
-  height: auto;
+  height: 200px;
+  padding: 12px;
+  object-fit: contain;
+  background: var(--img-bg);
   margin-bottom: 16px;
   border-bottom: 1px solid var(--line);
 }

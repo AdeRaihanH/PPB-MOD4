@@ -1,10 +1,23 @@
 import { useRef } from 'react'
 
-function GunCard({ gun }) {
+function GunCard({ gun, isFavorite, onToggleFavorite }) {
   const popup = useRef(null)
 
   return (
     <li className="card">
+      <button
+        type="button"
+        className={isFavorite ? 'fav-btn active' : 'fav-btn'}
+        onClick={() => onToggleFavorite(gun.name)}
+        aria-pressed={isFavorite}
+        aria-label={
+          isFavorite ? `Remove ${gun.name} from favorites` : `Save ${gun.name} to favorites`
+        }
+        title={isFavorite ? 'Remove from favorites' : 'Save to favorites'}
+      >
+        {isFavorite ? '★' : '☆'}
+      </button>
+
       <button className="card-btn" onClick={() => popup.current.showModal()}>
         <img className="card-img" src={gun.image} alt="" width="120" height="90" />
         <span className="name display">{gun.name}</span>
